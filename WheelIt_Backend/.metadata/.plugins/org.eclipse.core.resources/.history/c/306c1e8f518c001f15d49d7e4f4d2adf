@@ -1,0 +1,54 @@
+package com.app.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.Entities.cars;
+import com.app.dto.carDto;
+import com.app.exception.CustomException;
+import com.app.service.carService;
+
+@RestController
+@RequestMapping("/car")
+public class carController {
+	
+	@Autowired
+	public carService carService1;
+	
+	//add
+	@PostMapping("/add")
+	public boolean addNewCar(@RequestBody carDto cardto)throws CustomException
+	{
+		return carService1.addCar(cardto);
+	}
+	//update
+	@PutMapping("/update")
+	public boolean updateCar(@RequestBody cars enteredCar)throws CustomException
+	{
+		return carService1.updateCar(enteredCar);
+	}
+	//getall
+	@GetMapping("/all")
+	public List<cars> getAllCars()throws CustomException
+	{
+		return carService1.getAllCars();
+	}
+	//deletebyid
+	@DeleteMapping("/{id}")
+	public void deleteCar(@PathVariable Long id)throws CustomException
+	{
+		 carService1.deleteCar(id);
+	}
+	//getbyid
+	
+
+}

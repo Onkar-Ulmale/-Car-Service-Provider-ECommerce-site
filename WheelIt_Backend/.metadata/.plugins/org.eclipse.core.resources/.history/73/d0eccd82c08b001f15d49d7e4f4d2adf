@@ -1,0 +1,31 @@
+package com.app.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Entities.Users;
+import com.app.dto.userDto;
+import com.app.repository.userRepository;
+
+@Service
+@Transactional
+public class userService {
+	
+	@Autowired
+	public userRepository userRepo;
+	
+	//register
+	public boolean registerUser(userDto userdto)
+	{
+		//String name, String email, String password, long driving_license_number, String phonenumber
+		Users newUser=new Users(userdto.getName(),userdto.getEmail(),userdto.getPassword(),userdto.getDriving_license_number(),userdto.getPhonenumber());
+		userRepo.save(newUser);
+		return true;
+	}
+	//login
+	//update
+	//get by email 
+
+}

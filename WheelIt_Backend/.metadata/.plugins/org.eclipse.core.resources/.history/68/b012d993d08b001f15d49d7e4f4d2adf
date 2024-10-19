@@ -1,0 +1,52 @@
+package com.app.service;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Entities.rental;
+import com.app.dto.rentalDto;
+import com.app.exception.CustomException;
+import com.app.repository.rentalRepository;
+
+@Service
+@Transactional
+public class rentalService {
+	
+	@Autowired
+	public rentalRepository rentalRepo;
+	
+	//create
+	public boolean addNewRental(rentalDto enteredRentalDto)throws CustomException
+	{
+		try {
+		//Users user, cars car, Date start_date, Date end_date, int rental_price, int deposite, String status
+		rental newREntal=new rental(enteredRentalDto.getUser(),enteredRentalDto.getCar(),enteredRentalDto.getStart_date(),enteredRentalDto.getEnd_date(),
+				enteredRentalDto.getRental_price(),enteredRentalDto.getDeposite(),enteredRentalDto.getStatus());
+		rentalRepo.save(newREntal);
+		return true;
+		}catch(Exception e)
+		{
+			throw new CustomException("Error in creating a rental");
+		}
+	}
+	//retrive
+	public List<rental> getAllREntals()throws CustomException
+	{
+		try {
+			return rentalRepo.findAll();
+		}catch(Exception e)
+		{
+			throw new CustomException("Error in getting all rentals ");
+		}
+	}
+	//get by id
+	
+	//update/
+	//delete
+	
+
+}

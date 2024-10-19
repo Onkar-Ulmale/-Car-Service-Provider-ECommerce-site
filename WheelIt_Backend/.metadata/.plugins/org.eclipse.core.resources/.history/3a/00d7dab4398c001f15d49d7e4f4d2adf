@@ -1,0 +1,21 @@
+package com.app.dto;
+
+import java.util.Date;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.app.Entities.rental;
+
+public class paymentDto {
+
+	private int amount;
+	private Date payment_date;
+	private String satus;//completed,pending cancelled
+	private String payment_method;
+	
+	private rental rental;
+	
+	
+}

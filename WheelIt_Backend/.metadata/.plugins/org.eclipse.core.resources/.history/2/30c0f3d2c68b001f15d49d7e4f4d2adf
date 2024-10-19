@@ -1,0 +1,41 @@
+package com.app.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Entities.cars;
+import com.app.dto.carDto;
+import com.app.exception.CustomException;
+import com.app.repository.carRepository;
+
+@Service
+@Transactional
+public class carService {
+	
+	@Autowired
+	public carRepository carRepo;
+	
+	//create 
+	public boolean addCar(carDto cardto)throws CustomException
+	{
+		try {
+			//String model, String type, long pricePerDay, boolean isAvailable, byte[] imageData,
+			//String yearOfManufacturingl, String status
+			cars newCar=new cars(cardto.getModel(),cardto.getType(),cardto.getPricePerDay(),cardto.isAvailable(),cardto.getImageData(),
+					cardto.getYearOfManufacturingl(),cardto.getStatus());
+			carRepo.save(newCar);
+			return true;
+			
+		}catch(Exception e)
+		{
+			throw new CustomException("Error in adding a Car ");
+		}
+	}
+	//get All
+	//get by id
+	//update 
+	//delete
+
+}

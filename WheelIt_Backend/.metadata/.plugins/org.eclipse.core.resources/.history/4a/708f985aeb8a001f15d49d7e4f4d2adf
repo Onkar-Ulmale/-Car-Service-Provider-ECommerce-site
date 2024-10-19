@@ -1,0 +1,17 @@
+package com.app.Entities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payments")
+public class payment {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long payment_id;
+	
+
+}

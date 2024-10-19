@@ -1,0 +1,69 @@
+package com.app.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Entities.cars;
+import com.app.dto.carDto;
+import com.app.exception.CustomException;
+import com.app.repository.carRepository;
+
+@Service
+@Transactional
+public class carService {
+	
+	@Autowired
+	public carRepository carRepo;
+	
+	//create 
+	public boolean addCar(carDto cardto)throws CustomException
+	{
+		try {
+			//String model, String type, long pricePerDay, boolean isAvailable, byte[] imageData,
+			//String yearOfManufacturingl, String status
+			cars newCar=new cars(cardto.getModel(),cardto.getType(),cardto.getPricePerDay(),cardto.isAvailable(),cardto.getImageData(),
+					cardto.getYearOfManufacturingl(),cardto.getStatus());
+			carRepo.save(newCar);
+			return true;
+			
+		}catch(Exception e)
+		{
+			throw new CustomException("Error in adding a Car ");
+		}
+	}
+	//get All
+	public List<cars> getAllCars()throws CustomException
+	{
+		try {
+			return carRepo.findAll();
+				
+		}catch(Exception e)
+		{
+			throw new CustomException("Error in getting all cars");
+		}
+	}
+	//get by id
+	public carDto getCarById(long id)throws CustomException
+	{
+		try {
+			Optional<cars> enteredCar=carRepo.findById(id);
+			cars newCar =enteredCar.get();
+			//String model, String type, long pricePerDay, boolean isAvailable, byte[] imageData,
+			//String yearOfManufacturingl, String status
+			carDto newCarDto= new carDto(newCar.getModel(),newCar.getType(),newCar.getPricePerDay(),newCar.isAvailable(),newCar.getimageData(),
+					newCar.getYearOfManufacturingl(),newCar.getStatus());
+			return newCarDto;
+		}catch(Exception e)
+		{
+			throw new CustomException("Error in getting car by id");
+		}
+	}
+	//update 
+	//delete
+
+}

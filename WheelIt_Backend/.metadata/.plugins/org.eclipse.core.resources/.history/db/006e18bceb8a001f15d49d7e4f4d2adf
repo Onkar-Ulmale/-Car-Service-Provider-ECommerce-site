@@ -1,0 +1,33 @@
+package com.app.Entities;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payments")
+public class payment {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long payment_id;
+	
+	private int amount;
+	private Date payment_date;
+	private String satus;//completed,pending cancelled
+	private String payment_method;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rental_id")
+	private rental rental;
+	
+	
+
+}

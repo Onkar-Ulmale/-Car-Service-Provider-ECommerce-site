@@ -1,0 +1,9 @@
+package com.app.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.app.Entities.rental;
+
+public interface rentalRepository extends JpaRepository<rental, Long>{
+
+}
